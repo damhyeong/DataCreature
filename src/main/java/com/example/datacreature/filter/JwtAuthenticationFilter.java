@@ -12,8 +12,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
-@RequiredArgsConstructor // lombok
+@Component // DI 주입
+@RequiredArgsConstructor // lombok - 절대 NULL이여선 안되는 변수, 즉, final로 지정된 jwtProvider에 대해서 무조건적으로 생성자 변수를 받는다.
+/** (OncePerRequestFilter)
+ *  설명 :
+ *  - 일회용 dispatcher, 그리고 Multi Thread를 지원한다.
+ * */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtProvider jwtProvider;
 
@@ -22,6 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     }
 
+    // 뽑아낸 Token을 return해야하기에 String Return
     private String parseBearerToken(HttpServletRequest request){
         String authorization = request.getHeader("Authorization");
 
@@ -29,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         boolean hasAuthorization = StringUtils.hasText(authorization);
         if(!hasAuthorization) return null;
 
-        boolean isBearer = authorization.startsWith("Bearer ");
+        boolean isBearer = authorization.startsWith("Bearer "); // Bearer로 시작하느냐를 파악한다. => 아니라면 Bearer Token이 아니다.
         if(!isBearer) return null;
 
         // 여기까지 왔으면 Bearer 토큰 방식이라는 것을 증명한다고 한다.

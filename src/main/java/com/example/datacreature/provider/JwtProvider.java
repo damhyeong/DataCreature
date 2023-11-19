@@ -10,12 +10,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 // JWT 발급 및 확인기
-@Component
+
+@Component // 제어 역전을 통한 의존성 주입 - DI
 public class JwtProvider {
-    private String secretKey = "S3cr3tK3y";
+    private String secretKey = "K3yS3cr3tK3y"; // secretKey가 유튜브에 써 있기에, 임의로 다른 내용 지정.
 
     public String create(String email){
         // 1시간짜리 만료기간 만들기
+        /** Instant는 일회용 time-line 객체이다. */
         Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
 
         // jwt 생성
@@ -28,6 +30,7 @@ public class JwtProvider {
     }
 
     public String validate(String jwt){
+        // JWT JSON Map 변환을 위한 객체 - Claims
         Claims claims = null;
 
         try {
