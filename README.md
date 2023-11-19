@@ -6,6 +6,8 @@
 
 ## signIn - 로그인
 
+### URL - /api/v1/auth/sign-in
+
 ```js
 request : {
     email : "string"
@@ -77,17 +79,67 @@ response : {
 
 ## currentList - 최신 게시물 리스트
 
-```
-request : {
+### URL - /api/v1/exam/current-list/{pageNumber}
+
+```js
+ExamListItem : {
+    examNumber : int
+    title: string
+    content : string
+    favoriteCount : int
+    commentCount : int
+    viewCount : int
+    writeDatetime : string
+    writeNickname : string
+    writeProfileImage : string
     
 }
+
+/ HTTP Status - 200 (OK) - 성공 
+request : {
+    code : "SU"
+    message : "Success."
+    currentList : ExamListItem[]
+}
+
+/ HTTP Status - 500 (Internal Server Error) - 데이터베이스 에러
+response : {
+    code : "DE"
+    message : "Database Error."
+}
+
 ```
 
 <br>
 
 ## searchList - 검색 게시물 리스트
 
-```
+```js
+ExamDetail : {
+    examNumber : int
+    title: string
+    content : string
+    favoriteCount : int
+    commentCount : int
+    viewCount : int
+    writeDatetime : string
+    writeNickname : string
+    writeProfileImage : string
+    
+}
+
+/ HTTP Status - 200 (OK) - 성공 
+request : {
+    code : "SU"
+    message : "Success."
+    searchList : ExamDetail[]
+}
+
+/ HTTP Status - 500 (Internal Server Error) - 데이터베이스 에러
+response : {
+    code : "DE"
+    message : "Database Error."
+}
 
 ```
 
@@ -95,8 +147,32 @@ request : {
 
 ## examDetail - 문제 상세 정보
 
-```
+```js
+ExamDetail : {
+    examNumber : int
+    title: string
+    content : string
+    favoriteCount : int
+    commentCount : int
+    viewCount : int
+    writeDatetime : string
+    writeNickname : string
+    writeProfileImage : string
 
+}
+
+/ HTTP Status 200 (OK) - 성공 
+request : {
+    code : "SU"
+    message : "Success."
+    examId : ExamDetail["id"];
+}
+
+/ HTTP Status - 500 (Internal Server Error) - 데이터베이스 에러
+response : {
+    code : "DE"
+    message : "Database Error."
+}
 ```
 
 <br>
