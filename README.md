@@ -41,6 +41,8 @@ response : {
 
 ## signUp - 회원가입 
 
+### URL - POST /api/v1/auth/sign-up
+
 ```js
 request : {
     email : "string" // 필수
@@ -82,17 +84,21 @@ response : {
 ### URL - /api/v1/exam/current-list/{pageNumber}
 
 ```js
-ExamListItem : {
+ExamDetail : {
     examNumber : int
     title: string
-    content : string
+    level : int
+    // content : string
+    examIntro : string
+    conditionIntro : string
+    expList : {
+        input : string[];
+        output : string[];
+    }
     favoriteCount : int
-    commentCount : int
     viewCount : int
     writeDatetime : string
     writeNickname : string
-    writeProfileImage : string
-    
 }
 
 / HTTP Status - 200 (OK) - 성공 
@@ -114,18 +120,24 @@ response : {
 
 ## searchList - 검색 게시물 리스트
 
+### URL - /api/v1/exam/search-list/{searchWord}
+
 ```js
 ExamDetail : {
     examNumber : int
     title: string
-    content : string
+    level : int
+    // content : string
+    examIntro : string
+    conditionIntro : string
+    expList : {
+        input : string[];
+        output : string[];
+    }
     favoriteCount : int
-    commentCount : int
     viewCount : int
     writeDatetime : string
     writeNickname : string
-    writeProfileImage : string
-    
 }
 
 / HTTP Status - 200 (OK) - 성공 
@@ -147,18 +159,28 @@ response : {
 
 ## examDetail - 문제 상세 정보
 
+### URL - /api/v1/exam/{boardNumber}
+
 ```js
 ExamDetail : {
     examNumber : int
     title: string
-    content : string
+    level : int
+    // content : string
+    examIntro : string
+    conditionIntro : string
+    expList : {
+        input : string[];
+        output : string[];
+    }
     favoriteCount : int
-    commentCount : int
     viewCount : int
     writeDatetime : string
     writeNickname : string
-    writeProfileImage : string
+}
 
+request : {
+    examId : int
 }
 
 / HTTP Status 200 (OK) - 성공 
@@ -218,6 +240,8 @@ response : {
 <br>
 
 ## userExamList - 특정 유저 문제 리스트 
+
+### URL - /api/v1/exam/user-exam-list/{email}
 
 ```
 
