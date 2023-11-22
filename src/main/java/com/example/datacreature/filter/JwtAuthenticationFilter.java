@@ -29,32 +29,38 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = parseBearerToken(request); // token이 null 혹은 맞지 않는 형식인지 검사.
 
-        if(token == null){
-            filterChain.doFilter(request, response); // token이 없다면, 걸러낸다.
-            return;
+        try {
+            String token = parseBearerToken(request); // token이 null 혹은 맞지 않는 형식인지 검사.
+
+            if(token == null){
+                filterChain.doFilter(request, response); // token이 없다면, 걸러낸다.
+                return;
+            }
+
+            // JWT 검증 과정에서 오류가 난다면, JwtProvider 메서드인 validate가 null return 한다.
+            String email = jwtProvider.validate(token);
+
+            if(email == null){ // 검증 과정에서 오류가 났다면 걸러낸다.
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            // email : 사용자의 아이디, password : 비밀번호 -> 사용하지 않음.
+            AbstractAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(email, null, AuthorityUtils.NO_AUTHORITIES);
+            // WebAuthenticationDetailSource : 웹인증 사후정보 소스
+            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
+            securityContext.setAuthentication(authenticationToken);
+
+            SecurityContextHolder.setContext(securityContext);
+        } catch (Exception exception){
+            exception.printStackTrace();
         }
 
-        // JWT 검증 과정에서 오류가 난다면, JwtProvider 메서드인 validate가 null return 한다.
-        String email = jwtProvider.validate(token);
-
-        if(email == null){ // 검증 과정에서 오류가 났다면 걸러낸다.
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        // email : 사용자의 아이디, password : 비밀번호 -> 사용하지 않음.
-        AbstractAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(email, null, AuthorityUtils.NO_AUTHORITIES);
-
-
-        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-        SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
-        securityContext.setAuthentication(authenticationToken);
-
-        SecurityContextHolder.setContext(securityContext);
+        filterChain.doFilter(request, response);
     }
 
     // 뽑아낸 Token을 return해야하기에 String Return
