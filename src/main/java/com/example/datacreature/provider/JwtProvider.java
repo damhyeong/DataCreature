@@ -3,6 +3,7 @@ package com.example.datacreature.provider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -13,7 +14,9 @@ import java.util.Date;
 
 @Component // 제어 역전을 통한 의존성 주입 - DI
 public class JwtProvider {
-    private String secretKey = "K3yS3cr3tK3y"; // secretKey가 유튜브에 써 있기에, 임의로 다른 내용 지정.
+
+    @Value("${secret-key}") // application.properties에서 secret-key 변수를 가져온다.
+    private String secretKey; // secretKey가 유튜브에 써 있기에, 임의로 다른 내용 지정.
 
     public String create(String email){
         // 1시간짜리 만료기간 만들기
