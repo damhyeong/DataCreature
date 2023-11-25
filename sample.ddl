@@ -14,21 +14,21 @@ create TABLE user(
 ) COMMENT '유저 테이블';
 
 INSERT INTO user (email, password, nickname, tel_number, address, address_detail, profile_image) VALUES (
-                                                                                                            'rhdwhdals8@naver.com',
-                                                                                                            'pass1234', '담순쨩',
-                                                                                                            '010-2570-9448',
-                                                                                                            '경기도 화성시 탄요1길 25-8',
-                                                                                                            '301호',
-                                                                                                            null
-                                                                                                        );
+    'rhdwhdals8@naver.com',
+    'pass1234', '담순쨩',
+    '010-2570-9448',
+    '경기도 화성시 탄요1길 25-8',
+    '301호',
+    null
+);
 INSERT INTO user (email, password, nickname, tel_number, address, address_detail, profile_image) VALUES (
-                                                                                                            'user1@gmail.com',
-                                                                                                            'pass1234', 'user1',
-                                                                                                            '010-1234-5678',
-                                                                                                            '경기도 화성시 탄요1길 25-8',
-                                                                                                            '301호',
-                                                                                                            null
-                                                                                                        );
+    'user1@gmail.com',
+    'pass1234', 'user1',
+    '010-1234-5678',
+    '경기도 화성시 탄요1길 25-8',
+    '301호',
+    null
+);
 
 -- 유저 정보 검색
 -- SELECT * FROM user;
@@ -45,8 +45,10 @@ create TABLE Example(
                         PRIMARY KEY (example_number)
 ) COMMENT '문제 대표 정보';
 
-INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname) VALUES ('10까지 출력하기', 0, 2, 4, '2023-11-01 00:00:00', '담순쨩');
-INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname) VALUES ('10부터 거꾸로 출력하기',0, 3, 5, '2023-11-02 00:00:00', 'user1');
+INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname) VALUES
+    ('10까지 출력하기', 0, 2, 4, '2023-11-01 00:00:00', '담순쨩');
+INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname) VALUES
+    ('10부터 거꾸로 출력하기',0, 3, 5, '2023-11-02 00:00:00', 'user1');
 
 -- SELECT * FROM Example;
 
@@ -61,19 +63,19 @@ create TABLE Example_Source(
 ) COMMENT '문제 상세 정보';
 
 INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input, exam_output) VALUES (
-                                                                                                          (SELECT example_number FROM Example WHERE title='10까지 출력하기' AND write_nickname='담순쨩'),
-                                                                                                          '1부터 10까지 출력하세요',
-                                                                                                          '변수가 없기에 제한 조건은 없습니다.',
-                                                                                                          '',
-                                                                                                          '1 2 3 4 5 6 7 8 9 10'
-                                                                                                      );
+(SELECT example_number FROM Example WHERE title='10까지 출력하기' AND write_nickname='담순쨩'),
+    '1부터 10까지 출력하세요',
+    '변수가 없기에 제한 조건은 없습니다.',
+    '',
+    '1 2 3 4 5 6 7 8 9 10'
+);
 INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input, exam_output) VALUES (
-                                                                                                          (SELECT example_number FROM Example WHERE title='10부터 거꾸로 출력하기' AND write_nickname='user1'),
-                                                                                                          '10부터 1까지 출력하세요',
-                                                                                                          '변수가 없기에 제한 조건은 없습니다.',
-                                                                                                          '',
-                                                                                                          '10 9 8 7 6 5 4 3 2 1'
-                                                                                                      );
+(SELECT example_number FROM Example WHERE title='10부터 거꾸로 출력하기' AND write_nickname='user1'),
+    '10부터 1까지 출력하세요',
+    '변수가 없기에 제한 조건은 없습니다.',
+    '',
+    '10 9 8 7 6 5 4 3 2 1'
+);
 
 -- Example 테이블에 유저 정보 외부키 생성
 
