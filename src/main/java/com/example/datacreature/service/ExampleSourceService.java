@@ -21,6 +21,7 @@ public class ExampleSourceService {
     }
 
     public ExampleSource getExampleSourceById(int id) {
+        System.out.println("id : " + id);
         return repository.findById(id).orElse(null);
     }
 }
