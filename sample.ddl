@@ -76,6 +76,72 @@ INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input
     '',
     '10 9 8 7 6 5 4 3 2 1'
 );
+INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname)
+VALUES ('DFS와 BFS', '2', '1', '2', '2023-11-00 00:00:00', 'user1');
+
+INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input, exam_output) VALUES (
+                                                                                                          (SELECT example_number FROM Example WHERE title='DFS와 BFS' AND write_nickname='user1'),
+                                                                                                          '그래프를 DFS로 탐색한 결과와 BFS로 탐색한 결과를 출력하는 프로그램을 작성하시오. 단, 방문할 수 있는 정점이 여러 개인 경우에는 정점 번호가 작은 것을 먼저 방문하고, 더 이상 방문할 수 있는 점이 없는 경우 종료한다. 정점 번호는 1번부터 N번까지이다.',
+                                                                                                          '첫째 줄에 정점의 개수 N(1 ≤ N ≤ 1,000), 간선의 개수 M(1 ≤ M ≤ 10,000), 탐색을 시작할 정점의 번호 V가 주어진다. 다음 M개의 줄에는 간선이 연결하는 두 정점의 번호가 주어진다. 어떤 두 정점 사이에 여러 개의 간선이 있을 수 있다. 입력으로 주어지는 간선은 양방향이다.',
+                                                                                                          '4 5 1
+                                                                                                      1 2
+                                                                                                      1 3
+                                                                                                      1 4
+                                                                                                      2 4
+                                                                                                      3 4',
+                                                                                                          '1 2 4 3
+                                                                                                      1 2 3 4'
+                                                                                                      );
+
+INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname)
+VALUES ('바이러스', '3', '1', '2', '2023-11-00 00:00:00', 'user1');
+
+INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input, exam_output) VALUES (
+                                                                                                          (SELECT example_number FROM Example WHERE title='바이러스' AND write_nickname='user1'),
+                                                                                                          '신종 바이러스인 웜 바이러스는 네트워크를 통해 전파된다. 한 컴퓨터가 웜 바이러스에 걸리면 그 컴퓨터와 네트워크 상에서 연결되어 있는 모든 컴퓨터는 웜 바이러스에 걸리게 된다.
+
+                                                                                                          예를 들어 7대의 컴퓨터가 <그림 1>과 같이 네트워크 상에서 연결되어 있다고 하자. 1번 컴퓨터가 웜 바이러스에 걸리면 웜 바이러스는 2번과 5번 컴퓨터를 거쳐 3번과 6번 컴퓨터까지 전파되어 2, 3, 5, 6 네 대의 컴퓨터는 웜 바이러스에 걸리게 된다. 하지만 4번과 7번 컴퓨터는 1번 컴퓨터와 네트워크상에서 연결되어 있지 않기 때문에 영향을 받지 않는다.
+
+
+
+                                                                                                          어느 날 1번 컴퓨터가 웜 바이러스에 걸렸다. 컴퓨터의 수와 네트워크 상에서 서로 연결되어 있는 정보가 주어질 때, 1번 컴퓨터를 통해 웜 바이러스에 걸리게 되는 컴퓨터의 수를 출력하는 프로그램을 작성하시오.',
+                                                                                                          '첫째 줄에는 컴퓨터의 수가 주어진다. 컴퓨터의 수는 100 이하인 양의 정수이고 각 컴퓨터에는 1번 부터 차례대로 번호가 매겨진다. 둘째 줄에는 네트워크 상에서 직접 연결되어 있는 컴퓨터 쌍의 수가 주어진다. 이어서 그 수만큼 한 줄에 한 쌍씩 네트워크 상에서 직접 연결되어 있는 컴퓨터의 번호 쌍이 주어진다.',
+                                                                                                          '7
+                                                                                                          6
+                                                                                                          1 2
+                                                                                                          2 3
+                                                                                                          1 5
+                                                                                                          5 2
+                                                                                                          5 6
+                                                                                                          4 7',
+                                                                                                          '4'
+                                                                                                      );
+
+INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname)
+VALUES ('유기농 배추', '4', '1', '2', '2023-11-00 00:00:00', 'user1');
+
+INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input, exam_output) VALUES (
+                                                                                                          (SELECT example_number FROM Example WHERE title='유기농 배추' AND write_nickname='user1'),
+                                                                                                          '차세대 영농인 한나는 강원도 고랭지에서 유기농 배추를 재배하기로 하였다. 농약을 쓰지 않고 배추를 재배하려면 배추를 해충으로부터 보호하는 것이 중요하기 때문에, 한나는 해충 방지에 효과적인 배추흰지렁이를 구입하기로 결심한다. 이 지렁이는 배추근처에 서식하며 해충을 잡아 먹음으로써 배추를 보호한다. 특히, 어떤 배추에 배추흰지렁이가 한 마리라도 살고 있으면 이 지렁이는 인접한 다른 배추로 이동할 수 있어, 그 배추들 역시 해충으로부터 보호받을 수 있다. 한 배추의 상하좌우 네 방향에 다른 배추가 위치한 경우에 서로 인접해있는 것이다.
+
+한나가 배추를 재배하는 땅은 고르지 못해서 배추를 군데군데 심어 놓았다. 배추들이 모여있는 곳에는 배추흰지렁이가 한 마리만 있으면 되므로 서로 인접해있는 배추들이 몇 군데에 퍼져있는지 조사하면 총 몇 마리의 지렁이가 필요한지 알 수 있다. 예를 들어 배추밭이 아래와 같이 구성되어 있으면 최소 5마리의 배추흰지렁이가 필요하다. 0은 배추가 심어져 있지 않은 땅이고, 1은 배추가 심어져 있는 땅을 나타낸다.
+1	1	0	0	0	0	0	0	0	0
+0	1	0	0	0	0	0	0	0	0
+0	0	0	0	1	0	0	0	0	0
+0	0	0	0	1	0	0	0	0	0
+0	0	1	1	0	0	0	1	1	1
+0	0	0	0	1	0	0	1	1	1',
+                                                                                                          '첫째 줄에는 컴퓨터의 수가 주어진다. 컴퓨터의 수는 100 이하인 양의 정수이고 각 컴퓨터에는 1번 부터 차례대로 번호가 매겨진다. 둘째 줄에는 네트워크 상에서 직접 연결되어 있는 컴퓨터 쌍의 수가 주어진다. 이어서 그 수만큼 한 줄에 한 쌍씩 네트워크 상에서 직접 연결되어 있는 컴퓨터의 번호 쌍이 주어진다.',
+                                                                                                          '7
+                                                                                                          6
+                                                                                                          1 2
+                                                                                                          2 3
+                                                                                                          1 5
+                                                                                                          5 2
+                                                                                                          5 6
+                                                                                                          4 7',
+                                                                                                          '4'
+                                                                                                      );
 
 -- Example 테이블에 유저 정보 외부키 생성
 
