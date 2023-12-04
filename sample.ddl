@@ -77,7 +77,7 @@ INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input
     '10 9 8 7 6 5 4 3 2 1'
 );
 INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname)
-VALUES ('DFS와 BFS', '2', '1', '2', '2023-11-00 00:00:00', 'user1');
+VALUES ('DFS와 BFS', '2', '1', '2', '2023-11-01 00:00:00', 'user1');
 
 INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input, exam_output) VALUES (
                                                                                                           (SELECT example_number FROM Example WHERE title='DFS와 BFS' AND write_nickname='user1'),
@@ -94,7 +94,7 @@ INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input
                                                                                                       );
 
 INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname)
-VALUES ('바이러스', '3', '1', '2', '2023-11-00 00:00:00', 'user1');
+VALUES ('바이러스', '3', '1', '2', '2023-11-01 00:00:00', 'user1');
 
 INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input, exam_output) VALUES (
                                                                                                           (SELECT example_number FROM Example WHERE title='바이러스' AND write_nickname='user1'),
@@ -118,7 +118,7 @@ INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input
                                                                                                       );
 
 INSERT INTO Example (title, level, favorite_count, view_count, write_datetime, write_nickname)
-VALUES ('유기농 배추', '4', '1', '2', '2023-11-00 00:00:00', 'user1');
+VALUES ('유기농 배추', '4', '1', '2', '2023-11-01 00:00:00', 'user1');
 
 INSERT INTO Example_Source (exam_number, introduce, exam_constraints, exam_input, exam_output) VALUES (
                                                                                                           (SELECT example_number FROM Example WHERE title='유기농 배추' AND write_nickname='user1'),
@@ -188,9 +188,9 @@ ORDER BY example_number DESC
     LIMIT 10;
 
 -- 해당 example_number의 게시물 수정하기
-UPDATE Example
+/*UPDATE Example
 SET
     title = '수정된 제목',
     level = 1,
     write_datetime = '2023-11-11 08:30:00'
-WHERE example_number = 1;
+WHERE example_number = 1;*/

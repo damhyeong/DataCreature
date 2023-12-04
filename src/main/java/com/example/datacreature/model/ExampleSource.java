@@ -26,4 +26,9 @@ public class ExampleSource {
 
     @Column(name = "exam_output")
     private String examOutput;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "exam_number")
+    private Example example;
 }

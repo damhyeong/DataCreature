@@ -33,4 +33,8 @@ public class Example {
 
     @Column(name = "write_nickname")
     private String writeNickname;
+
+    // ExampleSource Table과 1:1 매칭 및, ID가 같으므로, 매핑하는 과정
+    @OneToOne(mappedBy = "example", cascade = CascadeType.ALL)
+    private ExampleSource exampleSource;
 }
