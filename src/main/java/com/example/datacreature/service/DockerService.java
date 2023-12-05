@@ -6,18 +6,23 @@ import com.github.dockerjava.api.command.LogContainerCmd;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
 @Service
+@Setter
+@NoArgsConstructor
 public class DockerService {
     private DockerClient dockerClient;
 
-
-    public DockerService(){
-        this.dockerClient = createDockerClient();
-    }
+//    @Autowired
+//    public DockerService(){
+//        this.dockerClient = createDockerClient();
+//    }
 
     public DockerClient createDockerClient(){
         return DockerClientBuilder.getInstance().build();

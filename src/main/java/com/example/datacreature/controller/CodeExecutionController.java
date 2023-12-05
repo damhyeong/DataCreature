@@ -1,5 +1,5 @@
 package com.example.datacreature.controller;
-/**
+
 import com.example.datacreature.service.DockerService;
 import com.github.dockerjava.api.DockerClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class CodeExecutionController {
 
     @PostMapping("/execute-code")
     public ResponseEntity<String> executeUserCode(@RequestBody String userCode){
-
         try{
+            this.dockerService.setDockerClient(this.dockerService.createDockerClient());
             String result = dockerService.executeCode(userCode);
             return ResponseEntity.ok(result);
         } catch (InterruptedException e){
@@ -32,4 +32,3 @@ public class CodeExecutionController {
 
 
 }
-*/
