@@ -24,12 +24,17 @@ public class JwtProvider {
         Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
 
         // jwt 생성
-        String jwt = Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256, secretKey)
-                .setSubject(email).setIssuedAt(new Date()).setExpiration(expiredDate)
-                .compact();
-
-        return jwt;
+        try{
+            String jwt = Jwts.builder()
+                    .signWith(SignatureAlgorithm.HS256, secretKey.getBytes())
+                    .setSubject(email).setIssuedAt(new Date()).setExpiration(expiredDate)
+                    .compact();
+            return jwt;
+        } catch (Exception e){
+            System.out.println("jwt Error start : ");
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String validate(String jwt){

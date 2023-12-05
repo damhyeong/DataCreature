@@ -18,12 +18,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component // DI 주입
-@RequiredArgsConstructor // lombok - 절대 NULL이여선 안되는 변수, 즉, final로 지정된 jwtProvider에 대해서 무조건적으로 생성자 변수를 받는다.
 /** (OncePerRequestFilter)
  *  설명 :
  *  - 일회용 dispatcher, 그리고 Multi Thread를 지원한다.
  * */
+@Component // DI 주입
+@RequiredArgsConstructor // lombok - 절대 NULL이여선 안되는 변수, 즉, final로 지정된 jwtProvider에 대해서 무조건적으로 생성자 변수를 받는다.
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtProvider jwtProvider;
 

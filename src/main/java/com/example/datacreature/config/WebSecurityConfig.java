@@ -47,21 +47,7 @@ public class WebSecurityConfig {
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
-        /* --> 더이상 먹히지 않는 옛날 방식이다. cors() 와 같은 메서드 선언 내부에 직접 람다 표현식을 써 줘야 한다. || 직접 내부에 메서드 작성
-        httpSecurity
-                .cors().and()
-                .csrf().disable()
-                .httpBasic().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                //.antMatchers().permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/board").permitAll()
-                .requestMatchers("/", "/api/v1/auth/**").permitAll()
-                .anyRequest().authenticated();
 
-                httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-                return httpSecurity.build();
-         */
         httpSecurity
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
@@ -71,7 +57,7 @@ public class WebSecurityConfig {
                 )
                 .authorizeHttpRequests(request -> {
                         request.requestMatchers(HttpMethod.GET, "/api/v1/board", "/api/v1/user/*", "/api/solvePage/**", "/api/examples/**").permitAll();
-                        request.requestMatchers(HttpMethod.POST, "/api/examples/**", "/docker/**").permitAll();
+                        request.requestMatchers(HttpMethod.POST, "/api/examples/**", "/docker/**", "/api/v1/auth/**").permitAll();
                         request.requestMatchers("/", "/api/v1/auth/**", "/api/v1/search/**", "/file/**").permitAll();
                         request.anyRequest().authenticated();
                 })
