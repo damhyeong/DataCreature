@@ -1,5 +1,5 @@
 package com.example.datacreature.service;
-/**
+
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.LogContainerCmd;
@@ -59,4 +59,3 @@ public class DockerService {
     }
 }
 
- */
