@@ -56,8 +56,8 @@ public class WebSecurityConfig {
                         sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(request -> {
-                        request.requestMatchers(HttpMethod.GET, "/api/v1/board", "/api/v1/user/*", "/api/solvePage/**", "/api/examples/**").permitAll();
-                        request.requestMatchers(HttpMethod.POST, "/api/examples/**", "/docker/**", "/api/v1/auth/**").permitAll();
+                        request.requestMatchers(HttpMethod.GET, "/api/v1/board", "/api/v1/user/*", "/api/solvePage/**", "/api/examples/**", "/code-execute/**").permitAll();
+                        request.requestMatchers(HttpMethod.POST, "/api/examples/**", "/code-execute/**", "/api/v1/auth/**").permitAll();
                         request.requestMatchers("/", "/api/v1/auth/**", "/api/v1/search/**", "/file/**").permitAll();
                         request.anyRequest().authenticated();
                 })

@@ -27,7 +27,6 @@ public class ExampleSourceController {
         this.uploadExampleService = uploadExampleService;
     }
 
-
     @GetMapping("/{id}")
     public ExampleSource getExampleSourceById(@PathVariable int id) {
         System.out.println("요청이 받아들여짐. : ExampleSource");
@@ -35,9 +34,13 @@ public class ExampleSourceController {
     }
 
     @GetMapping("/currentList")
-    public List<Example> getExampleSourceByCurrent(){
+    public ResponseEntity<?> getExampleSourceByCurrent(){
         System.out.println("최신 문제 리스트 요청이 받아들여짐 : getExampleSourceByCurrent()");
-        return examService.getAllExample();
+
+        List<Example> examples = examService.getAllExample();
+        System.out.println("최신 문제 리스트 요청이 반환되기 직전임 : getExampleSourceByCurrent()");
+
+        return ResponseEntity.ok(examples);
     }
 
     @PostMapping("/examUpload")

@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try {
             String token = parseBearerToken(request); // token이 null 혹은 맞지 않는 형식인지 검사.
-
+            System.out.println("token : " + token);
             if(token == null){
                 filterChain.doFilter(request, response); // token이 없다면, 걸러낸다.
                 return;
@@ -40,6 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             // JWT 검증 과정에서 오류가 난다면, JwtProvider 메서드인 validate가 null return 한다.
             String email = jwtProvider.validate(token);
+            System.out.println("email : " + email);
 
             if(email == null){ // 검증 과정에서 오류가 났다면 걸러낸다.
                 filterChain.doFilter(request, response);

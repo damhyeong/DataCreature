@@ -26,7 +26,7 @@ public class JwtProvider {
         // jwt 생성
         try{
             String jwt = Jwts.builder()
-                    .signWith(SignatureAlgorithm.HS256, secretKey.getBytes())
+                    .signWith(SignatureAlgorithm.HS256, secretKey)
                     .setSubject(email).setIssuedAt(new Date()).setExpiration(expiredDate)
                     .compact();
             return jwt;
@@ -44,6 +44,8 @@ public class JwtProvider {
         try {
             claims = Jwts.parser().setSigningKey(secretKey)
                     .parseClaimsJws(jwt).getBody();
+            System.out.println("Claims : ");
+            System.out.println(claims);
         }catch (Exception exception){
             exception.printStackTrace();
             return null;

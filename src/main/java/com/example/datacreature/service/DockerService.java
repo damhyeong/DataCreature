@@ -6,31 +6,48 @@ import com.github.dockerjava.api.command.LogContainerCmd;
 import com.github.dockerjava.api.model.Frame;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.LogContainerResultCallback;
+import com.github.dockerjava.okhttp.OkDockerHttpClient;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
 @Service
 @Setter
-@NoArgsConstructor
+@Getter
 public class DockerService {
     private DockerClient dockerClient;
 
 //    @Autowired
-//    public DockerService(){
-//        this.dockerClient = createDockerClient();
+//    public DockerService(DockerClient dockerClient){
+//        this.dockerClient = dockerClient;
 //    }
 
     public DockerClient createDockerClient(){
-        return DockerClientBuilder.getInstance().build();
+        DockerClient dockerClient = DockerClientBuilder.getInstance()
+                .withDockerHttpClient(new OkDockerHttpClient.Builder()
+                        .dockerHost(URI.create("unix:///var/run/docker.sock"))
+                        .build())
+                .build();
+
+        return dockerClient;
     }
 
     public String executeCode(String userCode) throws InterruptedException {
+
+        String fileName = "UserCode";
+        saveToFile(fileName, userCode);
+
         //Docker Image를 기반으로 컨테이너 생성
-        CreateContainerResponse container = dockerClient.createContainerCmd("java:8")
+        CreateContainerResponse container = dockerClient.createContainerCmd("openjdk:8")
                 .withCmd("java", "-c", userCode)
                 .exec();
 
@@ -61,6 +78,17 @@ public class DockerService {
         }).awaitCompletion(30, TimeUnit.SECONDS);
 
         return logBuilder.toString();
+    }
+
+    public void saveToFile(String filename, String code) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+            writer.write(code);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // 적절한 예외 처리
+        }
     }
 }
 

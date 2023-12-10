@@ -1,5 +1,6 @@
 package com.example.datacreature.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +36,7 @@ public class Example {
     private String writeNickname;
 
     // ExampleSource Table과 1:1 매칭 및, ID가 같으므로, 매핑하는 과정
+    @JsonIgnore
     @OneToOne(mappedBy = "example", cascade = CascadeType.ALL)
     private ExampleSource exampleSource;
 }

@@ -12,13 +12,13 @@ import java.util.List;
 @Service
 public class ExampleSourceService {
     private final ExampleSourceRepository exampleSourceRepository;
-    private final ExampleRepository exampleRepository;
+    // private final ExampleRepository exampleRepository;
 
 
     @Autowired
     public ExampleSourceService(ExampleSourceRepository exampleSourceRepository, ExampleRepository exampleRepository) {
         this.exampleSourceRepository = exampleSourceRepository;
-        this.exampleRepository = exampleRepository;
+        // this.exampleRepository = exampleRepository;
     }
 
     public List<ExampleSource> getAllExampleSources() {

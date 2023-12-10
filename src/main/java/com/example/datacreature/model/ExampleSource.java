@@ -1,6 +1,7 @@
 package com.example.datacreature.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class ExampleSource {
     @Column(name = "exam_output")
     private String examOutput;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     @JoinColumn(name = "exam_number")

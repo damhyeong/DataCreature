@@ -1,5 +1,7 @@
 package com.example.datacreature.controller;
 
+import com.example.datacreature.dto.request.ExecuteCodeRequest;
+import com.example.datacreature.service.CodeExecutionService;
 import com.example.datacreature.service.DockerService;
 import com.github.dockerjava.api.DockerClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,26 +11,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/docker")
+@RequestMapping("/code-execute")
 @CrossOrigin(origins = "http://localhost:3000")
 public class CodeExecutionController {
-    public DockerService dockerService;
+    // public final DockerService dockerService;
+    public final CodeExecutionService codeExecutionService;
 
     @Autowired
-    public CodeExecutionController(DockerService dockerService){
-        this.dockerService = dockerService;
+    public CodeExecutionController(CodeExecutionService codeExecutionService){
+        this.codeExecutionService = codeExecutionService;
     }
 
-    @PostMapping("/execute-code")
-    public ResponseEntity<String> executeUserCode(@RequestBody String userCode){
+    /*@PostMapping("/execute-code")
+    public ResponseEntity<?> executeUserCode(@RequestBody ExecuteCodeRequest userCode){
+        System.out.println("executeUserCode(@RequestBody String userCode) 실행");
+
+        String code = userCode.getUserCode();
+        System.out.println("userCode : ");
+        System.out.println(code);
         try{
-            this.dockerService.setDockerClient(this.dockerService.createDockerClient());
-            String result = dockerService.executeCode(userCode);
+            DockerClient dockerClient = this.dockerService.createDockerClient();
+            this.dockerService.setDockerClient(dockerClient);
+            String result = dockerService.executeCode(code);
             return ResponseEntity.ok(result);
         } catch (InterruptedException e){
             return ResponseEntity.internalServerError().body("Error executing code: " + e.getMessage());
         }
+    }*/
+
+    @GetMapping("/test-run-code")
+    public void executeUserCode(){
+        System.out.println("executeUserCode() 실행됨 : Controller 받음");
+        codeExecutionService.testRunUserCode();
     }
-
-
 }
