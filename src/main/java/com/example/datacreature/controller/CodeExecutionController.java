@@ -1,6 +1,8 @@
 package com.example.datacreature.controller;
 
 import com.example.datacreature.dto.request.ExecuteCodeRequest;
+import com.example.datacreature.dto.request.RunUserCode;
+import com.example.datacreature.dto.response.CodeResult;
 import com.example.datacreature.service.CodeExecutionService;
 import com.example.datacreature.service.DockerService;
 import com.github.dockerjava.api.DockerClient;
@@ -43,5 +45,12 @@ public class CodeExecutionController {
     public void executeUserCode(){
         System.out.println("executeUserCode() 실행됨 : Controller 받음");
         codeExecutionService.testRunUserCode();
+    }
+    @PostMapping("/test-run-code")
+    public ResponseEntity<CodeResult> executingUserCode(@RequestBody RunUserCode runUserCode){
+        System.out.println("executingUserCode() Post 실행됨");
+        CodeResult codeResult = codeExecutionService.runUserCode(runUserCode.getUserCode(), runUserCode.getInput(), runUserCode.getOutput());
+
+        return ResponseEntity.ok(codeResult);
     }
 }
